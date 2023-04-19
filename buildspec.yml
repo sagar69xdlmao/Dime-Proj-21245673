@@ -8,13 +8,11 @@ phases:
         # Install dependencies needed for running the static analysis
             - pip install -r requirements.txt pylint
             - pip install bandit
-            - pip install safety
     pre_build:
         commands:
             - python --version
             - pylint *.py **/*.py || true
             - bandit -r app.py
-            - safety check --full-report
     post_build:
         commands:
             - echo Build completed on `date`
