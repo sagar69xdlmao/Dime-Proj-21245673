@@ -7,10 +7,14 @@ phases:
             - pip install --upgrade pip
         # Install dependencies needed for running the static analysis
             - pip install -r requirements.txt pylint
+            - pip install flake8
+            - pip install bandit
     pre_build:
         commands:
             - python --version
             - pylint *.py **/*.py || true
+            - flake8 --max-line-length=120 .
+            - bandit -r app.py
 artifacts:
     files:
         - '**/*'
